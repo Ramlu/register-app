@@ -1,8 +1,8 @@
 pipeline {
 	agent { label 'Jenkins-Agent'}
 	tools {
-		jdk 'Jdk17'
-		maven 'Maven3'
+		jdk 'java17'
+		maven 'maven3'
 	}
 	stages {
 		stage('Clean WS') {
