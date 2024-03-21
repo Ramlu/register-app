@@ -1,13 +1,14 @@
 pipeline {
-	agent { label 'Jenkins-Agent'}
+	agent { label "Jenkins-Agent"}
 	tools {
-		jdk 'java17'
-		maven 'maven3'
+		jdk "Java17"
+		maven "Maven3"
 	}
+
 	stages {
-		stage('Clean WS') {
+		stage('Clean Workspace') {
 			steps {
-				cleanWs()
+				cleanOs()
 			}
 		}
 		stage('Checkout SCM') {
@@ -15,14 +16,14 @@ pipeline {
 				git branch: 'main', url: 'https://github.com/Ramlu/register-app.git'
 			}
 		}
-		stage('Build Clean') {
+		stage('Maven Package') {
 			steps {
 				sh 'mvn clean package'
 			}
 		}
-		stage('Test Application') {
+		stage('Maven Install') {
 			steps {
-				sh 'mvn test'
+				sh 'mvn install'
 			}
 		}
 	}
