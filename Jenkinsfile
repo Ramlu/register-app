@@ -27,15 +27,19 @@ sh 'mvn -e clean install'
 }
 }
 
-stage('Sonarqube Analysis') {
-			steps {
-				script {
-					withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
-    					sh 'mvn sonar:sonar'
-					}
-				}
-			}
-		}
- 
+stage('Push the image') {
+steps {
+script {
+ docker.withRegistry('',DOCKER_PASS) { 
+                        			docker_image = docker.build "${IMAGE_NAME}" 
+                    			} 
+                    			docker.withRegistry('',DOCKER_PASS) { 
+                        			docker_image.push("${IMAGE_TAG}") 
+                        			docker_image.push('latest') 
+                    			}    
+}
+}
+}
+
 }
 }
