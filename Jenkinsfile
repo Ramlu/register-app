@@ -12,7 +12,7 @@ cleanWs()
 }	
 stage('Checkout from SCM') {
 steps {
-git branch: 'main', url: 'https://github.com/Ramlu/register-					app.git'
+git branch: 'main', url: 'https://github.com/Ramlu/register-app.git'
 }
 }
 stage('Build Clean') {
