@@ -1,28 +1,37 @@
 pipeline {
-agent { label 'Jenkins-Agent'}	
+agent { label "Jenkins-Agent"}
 tools {
-jdk 'Java17'
-maven 'Maven3'
+jdk "Java17"
+maven "Maven3"
 }
+ 
 stages {
 stage('Clean Workspace') {
 steps {
 cleanWs()
 }
-}	
-stage('Checkout from SCM') {
+}
+stage('Checkout SCM') {
 steps {
 git branch: 'main', url: 'https://github.com/Ramlu/register-app.git'
 }
 }
-stage('Build Clean') {
+stage('Maven Package') {
 steps {
 sh 'mvn clean package'
 }
 }
-stage('Test Application') {
+stage('Maven Install') {
 steps {
-sh 'mvn test'
+sh 'mvn install'
+}
+}
+stage('Sonarqube Analysis') {
+steps {
+script {
+withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+    						sh 'mvn sonar:sonar'
+}
 }
 }
 }
