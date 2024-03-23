@@ -53,42 +53,7 @@
         </configuration>
       </plugin>
 
-      <plugin>
-        <artifactId>maven-site-plugin</artifactId>
-        <configuration>
-          <reportPlugins>
-            <plugin>
-              <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-              <artifactId>maven-jxr-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-              <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-              <artifactId>maven-pmd-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-              <artifactId>maven-surefire-report-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>findbugs-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>taglist-maven-plugin</artifactId>
-            </plugin>
-          </reportPlugins>
-        </configuration>
-      </plugin>
+    
     </plugins>
 
     <pluginManagement>
@@ -132,12 +97,6 @@
           <artifactId>maven-resources-plugin</artifactId>
           <version>2.5</version>
         </plugin>
-
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.0</version>
-        </plugin>
-
         <plugin>
           <artifactId>maven-surefire-report-plugin</artifactId>
           <version>2.11</version>
@@ -229,7 +188,6 @@
 
   <reporting>
     <plugins>
-      <!-- Move the reportPlugins configuration to here -->
       <plugin>
         <artifactId>maven-checkstyle-plugin</artifactId>
       </plugin>
