@@ -223,17 +223,5 @@
   <prerequisites>
     <maven>3.0.3</maven>
   </prerequisites>
-          <reporting>
-        <plugins>
-            <!-- Reporting plugins configuration -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.12</version>
-                <!-- Configuration for maven-site-plugin -->
-            </plugin>
-            
-            <!-- Other reporting plugins configuration -->
-        </plugins>
-    </reporting>
+         
 </project>
