@@ -36,3 +36,4 @@ withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
 }
 }
 }
+}
