@@ -23,7 +23,7 @@ sh 'mvn clean package'
 }
 stage('Maven Install') {
 steps {
-sh 'mvn install'
+sh 'mvn -X clean install'
 }
 }
 
