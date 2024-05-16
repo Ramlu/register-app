@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'Jenkins-Agent'
+        label 'jenkins-agent'
     }
     tools {
         jdk 'java17'
@@ -26,6 +26,6 @@ pipeline {
         steps { 
             sh 'mvn test' 
             } 
-        } 
+        }  
     }
 }
