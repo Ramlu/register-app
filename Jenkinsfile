@@ -17,5 +17,10 @@ pipeline {
                 git branch: 'main', credentialsId: 'Github', url: 'https://github.com/Ramlu/register-app'
             }
         }
+        stage('Build Clean') { 
+        steps { 
+                sh 'mvn clean package' 
+            } 
+        } 
     }
 }
