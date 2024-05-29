@@ -12,10 +12,10 @@ pipeline {
         }
         stage('Git Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Ramlu/register-app.git'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Ramlu/register-app'
             }
         }
-        stage('Clean Package') {
+        stage(' Build Clean') {
             steps {
                 sh 'mvn clean package'
             }
