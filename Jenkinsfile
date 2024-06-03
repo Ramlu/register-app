@@ -15,14 +15,24 @@ pipeline {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/Ramlu/register-app'
             }
         }
-        stage(' Build Clean') {
+        stage('Maven Package') {
             steps {
                 sh 'mvn clean package'
             }
         }
-        stage('Test Application') {
+        stage('Maven Install') {
             steps {
-                sh 'mvn test'
+                sh 'mvn install'
+            }
+        }
+        stage('Sonarqube Analysis') {
+            steps {
+                script {
+                withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+                        // some block
+                        sh 'mvn sonar:sonar'
+                    }
+                }
             }
         }
     }
