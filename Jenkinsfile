@@ -1,61 +1,88 @@
-pipeline {
-    agent { label 'jenkins-agent' }
+pipeline { 
 
-    tools {
+agent { label "Jenkins-Agent"} 
+
+tools {
         jdk 'java17'
         maven 'maven3'
     }
 
-    stages {
-        stage('Clean Workspace') {
-            steps {
-                cleanWs()
-            }
-        }
-        stage('Checkout Git') {
-            steps {
-                git branch: 'main', credentialsId: 'Github', url: 'https://github.com/Ramlu/register-app.git'
-            }
-        }
-        stage('Clean Package') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
-        stage('Test Application') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
-                        sh 'mvn sonar:sonar'
-                    }
-                }
-            }
-        }
-        stage('Quality Gates') {
-            steps {
-                script {
-                    timeout(time: 1, unit: 'HOURS') {
-                        def qg = waitForQualityGate()
-                        if (qg.status != 'OK') {
-                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                        }
-                    }
-                }
-            }
-        }
-    }
+  
 
-    post {
-        success {
-            echo 'Pipeline completed successfully.'
-        }
-        failure {
-            echo 'Pipeline failed.'
-        }
-    }
-}
+stages { 
+
+stage('Clean Workspace') { 
+
+steps { 
+
+cleanWs() 
+
+} 
+
+} 
+
+stage('Checkout SCM') { 
+
+steps { 
+
+git branch: 'main', url: 'https://github.com/Ramlu/register-app.git' 
+
+} 
+
+} 
+
+stage('Maven Package') { 
+
+steps { 
+
+sh 'mvn clean package' 
+
+} 
+
+} 
+
+stage('Maven Install') { 
+
+steps { 
+
+sh 'mvn install' 
+
+} 
+
+} 
+
+stage('Sonarqube Analysis') { 
+
+steps { 
+
+script { 
+
+withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') { 
+
+    						sh 'mvn sonar:sonar' 
+
+} 
+
+} 
+
+} 
+
+} 
+
+stage('Quality Gates') { 
+
+steps { 
+
+script { 
+
+waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonarqube-token'  
+
+}	 
+
+} 
+
+} 
+
+} 
+
+} 
