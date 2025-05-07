@@ -1,32 +1,34 @@
 pipeline {
-        agent {
-                label 'jenkins-agent'
-        }
 
-        tools {
-                jdk 'Java17'
-                maven 'Maven3'
+    agent {
+        label "jenkins-agent"
+    }
+
+    tools {
+        jdk 'jdk21'
+        maven 'maven3'
+    }
+
+    stages {
+        stage('CleanWS') {
+            steps {
+                cleanWS()
+            }
         }
-        stages {
-                stage('CleanWS') {
-                        steps {
-                              cleanWs()  
-                        }
-                }
-                stage('Clone') {
-                        steps {
-                                git branch: 'main', credentialsId: 'Github', url: 'https://github.com/Ramlu/register-app.git'
-                        }
-                }
-                stage('Maven Clean') {
-                        steps {
-                                sh 'mvn clean install'
-                        }
-                }
-                stage('Package') {
-                        steps {
-                                sh 'mvn package'
-                        }
-                }
+        stage('clone') {
+            steps {
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Ramlu/register-app.git'
+            }
         }
+        stage('Maven clean') {
+            steps {
+                sh 'maven clean install'
+            }
+        }
+        stage('Maven Test') {
+            steps {
+                sh 'maven test'
+            }
+        }
+    }
 }
