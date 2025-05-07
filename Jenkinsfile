@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('CleanWS') {
             steps {
-                cleanWS()
+                cleanWs()
             }
         }
         stage('clone') {
