@@ -22,12 +22,12 @@ pipeline {
         }
         stage('Maven clean') {
             steps {
-                sh 'maven clean install'
+                sh 'mvn clean install'
             }
         }
         stage('Maven Test') {
             steps {
-                sh 'maven test'
+                sh 'mvn test'
             }
         }
     }
